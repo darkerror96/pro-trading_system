@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Sollers Trading System - Create Order</title>
+</head>
+
+<style>
+ul.navList {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 200px;
+	background-color: #f1f1f1;
+	border: 1px solid #555;
+}
+
+li.navItem a {
+	display: block;
+	color: #000;
+	padding: 8px 16px;
+	text-decoration: none;
+}
+
+li.navItem {
+	text-align: center;
+	border-bottom: 1px solid #555;
+}
+
+li.navItem:last-child {
+	border-bottom: none;
+}
+
+li.navItem a.active {
+	background-color: #4CAF50;
+	color: white;
+}
+
+li.navItem a:hover:not (.active) {
+	background-color: #555;
+	color: white;
+}
+</style>
+
+<body>
+
+	<h1>Create Order</h1>
+
+
+	<!-- If there is a user id in session, display it -->
+	<p th:if="${session.userId != null}">
+		Current session user id: <span th:text="${session.userId}"></span>
+	</p>
+
+	<!-- If there are error messages, display them -->
+	<p style="color: red;" th:if="${errorMessage != null}">
+		<th:block th:each="message: ${errorMessage}"> 
+			<span th:text="${message}"></span>
+		</th:block> <br>
+	</p>
+
+	<!-- If a position was provided to the view, display symbol -->
+	<th:block th:switch="${position}">
+		<div th:case="null"></div>
+		<div th:case="*">
+			<p style="color:blue;">For selected position of <span th:text="${position.symbol}"></span>	</p>
+		</div>
+	</th:block>
+	
+	
+	<form name="orderform" method="post" action="CreateOrder">
+		<div style="float: left; width: 20%;">
+
+			<th:block th:switch="${position}">
+			
+				<div th:case="null">
+					<label for="openPosition">Enter a position</label> <br> 
+					<input type="radio" name="orderType" id="openPosition" value="BUY" required> Buy<br> 
+					<input type="radio" name="orderType" id="openPosition" value="SELL_SHORT"> Sell Short<br> <br>
+				</div>
+				
+				<div th:case="*"> <!-- Position attribute was provided -->
+					<th:block th:switch="${position.side}">
+					
+						<div th:case="1">
+							<label for="closePosition">Close Position</label>
+							<br>
+							<input type="radio" name="orderType" id="closePosition"	value="SELL" required> Sell<br>
+						</div>
+						
+						<div th:case="-1">
+							<label for="closePosition">Close Position</label>
+							<br>
+							<input type="radio" name="orderType" id="closePosition"	value="BUY_TO_COVER" required> Buy to Cover<br>
+						</div>
+					</th:block>
+				</div>
+			</th:block>
+
+		</div>
+		
+		
+		<div style="float: left; width: 20%;">
+			<label for="qtty">Quantity</label>
+			
+			<th:block th:switch="${position}">
+				<div th:case="null">
+					<input type="text" name="quantity" id="qtty" pattern="\d{1,6}"
+						title="Number with 1-6 digits" required>
+				</div>
+				<div th:case="*">
+					<input type="text" name="quantity" id="qtty"
+						th:value="${position.size}" pattern="\d{1,6}"
+						title="Number with 1-6 digits" readonly>
+				</div>
+			</th:block>
+
+		</div>
+		<div style="float: left; width: 20%;">
+			<label for="smbl">Symbol</label>
+			
+			<th:block th:switch="${position}">
+				<div th:case="null">
+					<input type="text" name="symbol" id="smbl" pattern="^[a-zA-Z]+$"
+						title="Letters only" required>
+				</div>
+				<div th:case="*">
+					<input type="text" name="symbol" id="smbl"
+						 pattern="^[a-zA-Z]+$"
+						title="Letters only" readonly th:value="${position.symbol}">
+				</div>
+			
+			</th:block>
+
+		</div>
+		<div style="float: left; width: 20%;">
+			<input type="radio" name="priceType" value="MARKET" id="mkt" required>
+			Market<br> <input type="radio" name="priceType" value="LIMIT"
+				id="lmt"> Limit<br> <input type="radio"
+				name="priceType" value="STOP" id="stp"> Stop<br> <br>
+
+			<label for="stopPr">Stop/Limit Price</label> <input type="text"
+				name="stopPrice" id="stopPr" pattern="\d{1,6}"
+				title="Number with 1-6 digits" disabled required>
+		</div>
+		<div style="float: left; width: 20%;">
+			<input type="radio" name="duration" value="DAY" required>
+			Good For Today<br> <input type="radio" name="duration"
+				value="GTC"> Good Till Canceled<br> <input type="radio"
+				name="duration" value="GTX"> Good Till Executed<br>
+		</div>
+		<div style="clear: both; text-align: center;">
+			<br>
+			<hr />
+			<input type="submit" name="submit" value="Place Order" />
+		</div>
+	</form>
+	<ul class="navList">
+		<li class="navItem"><a href="AccountHome">Home</a></li>
+	</ul>
+	<script>
+		document
+				.getElementById("mkt")
+				.addEventListener(
+						'change',
+						function() {
+							document.getElementById("stopPr").disabled = this.checked;
+							document.getElementById("stopPr").value = "";
+							document.getElementById("stopPr").required = (this.checked) ? false
+									: true;
+						});
+
+		document
+				.getElementById("lmt")
+				.addEventListener(
+						'change',
+						function() {
+							document.getElementById("stopPr").disabled = (this.checked) ? false
+									: true;
+							document.getElementById("stopPr").required = this.checked;
+						});
+		document
+				.getElementById("stp")
+				.addEventListener(
+						'change',
+						function() {
+							document.getElementById("stopPr").disabled = (this.checked) ? false
+									: true;
+							document.getElementById("stopPr").required = this.checked;
+						});
+	</script>
+</body>
+
+</html>

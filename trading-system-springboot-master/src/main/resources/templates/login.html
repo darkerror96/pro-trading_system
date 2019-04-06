@@ -1,0 +1,29 @@
+
+<!-- @author Karanveer -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Trading System</title>
+</head>
+<body>
+	<h1>Login</h1>
+	
+	<!-- If there is an error message, display it -->
+	<p style="color:red;" th:if="${errorMessage != null}"><span th:text="${errorMessage}"></span><br></p>
+	
+	<!-- If there is a user id in session, display it -->
+	<p th:if="${session.userId != null}">Current session user id: <span th:text="${session.userId}"></span></p>
+
+
+	<form action="LoginController" method="post">
+		Enter username :<input type="text" name="username"><br>
+		Enter password :<input type="password" name="password"><br>
+		<br> <input type="submit" value="Login">
+	</form>
+	<h2>
+		<a href="AddUser">Create New Account</a>
+	</h2>
+
+</body>
+</html>

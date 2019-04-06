@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Sollers Trading System - New Order</title>
+</head>
+<style>
+ul.navList {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 200px;
+	background-color: #f1f1f1;
+	border: 1px solid #555;
+}
+
+li.navItem a {
+	display: block;
+	color: #000;
+	padding: 8px 16px;
+	text-decoration: none;
+}
+
+li.navItem {
+	text-align: center;
+	border-bottom: 1px solid #555;
+}
+
+li.navItem:last-child {
+	border-bottom: none;
+}
+
+li.navItem a.active {
+	background-color: #4CAF50;
+	color: white;
+}
+
+li.navItem a:hover:not (.active) {
+	background-color: #555;
+	color: white;
+}
+
+li.navItem a.logout {
+	float: right;
+}
+</style>
+<body>
+	<h3>
+		<a href="CreateOrder">New Order</a>
+	</h3>
+	<h3>
+		<a href="ClosePosition">Close Existing Position</a>
+	</h3>
+	<br>
+	<br>
+	<ul class="navList">
+		<li class="navItem"><a class="active" href="AccountHome">Home</a></li>
+	</ul>
+</body>
+</html>

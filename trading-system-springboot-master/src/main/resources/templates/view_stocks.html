@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Sollers Trading System - View Stocks</title>
+<link rel="stylesheet" type="text/css" th:href="@{table_style.css}" />
+</head>
+
+<body>
+	<h1>Stocks</h1>
+	<th:block th:switch="${stocks}">
+		<div th:case="null">
+			<p>No stocks in db.</p>
+		</div>
+
+		<div th:case="*">
+
+			<div class="rTable">
+				<div class="rTableRow">
+					<div class="rTableHead">
+						<strong>Symbol</strong>
+					</div>
+					<div class="rTableHead">
+						<strong>Description</strong>
+					</div>
+					<div class="rTableHead">
+						<strong>Bid</strong>
+					</div>
+					<div class="rTableHead">
+						<strong>Ask</strong>
+					</div>
+					<div class="rTableHead">
+						<strong>Last</strong>
+					</div>
+				</div>
+
+				<th:block th:each="stock: ${stocks}">
+					<div class="rTableRow">
+						<div class="rTableCell">
+							<span th:text="${stock.symbol}"></span>
+						</div>
+						<div class="rTableCell">
+							<span th:text="${stock.fullName}"></span>
+						</div>
+						<div class="rTableCell">
+							<span th:text="${stock.bid}"></span>
+						</div>
+						<div class="rTableCell">
+							<span th:text="${stock.ask}"></span>
+						</div>
+						<div class="rTableCell">
+							<span th:text="${stock.last}"></span>
+						</div>
+					</div>
+				</th:block>
+
+			</div>
+			<!-- End Table Div -->
+		</div>
+	</th:block>
+	<br>
+	<br>
+	<ul class="navList">
+		<li class="navItem"><a href="AccountHome">Home</a></li>
+	</ul>
+
+</body>
+</html>

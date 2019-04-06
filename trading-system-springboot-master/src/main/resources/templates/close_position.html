@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Sollers Trading System - Close Position</title>
+</head>
+
+<style>
+ul.navList {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 200px;
+	background-color: #f1f1f1;
+	border: 1px solid #555;
+}
+
+li.navItem a {
+	display: block;
+	color: #000;
+	padding: 8px 16px;
+	text-decoration: none;
+}
+
+li.navItem {
+	text-align: center;
+	border-bottom: 1px solid #555;
+}
+
+li.navItem:last-child {
+	border-bottom: none;
+}
+
+li.navItem a.active {
+	background-color: #4CAF50;
+	color: white;
+}
+
+li.navItem a:hover:not (.active) {
+	background-color: #555;
+	color: white;
+}
+</style>
+
+<body>
+	<h1>Positions</h1>
+	<th:block th:switch="${positions}">
+		<div th:case="null">
+				<ul class="navList">
+					<li class="navItem"><a href="CreateOrder">New Trade</a></li>
+				</ul>
+		</div>
+		
+		<div th:case="*">
+			
+			<form name="positionform" method="post">
+			
+				<th:block th:each="position: ${positions}">
+					<input type="radio" name="openPosition" th:value="${position.id}" required>
+					<span th:text="${position}"></span> <br>
+				</th:block>
+				<br>
+				<input type="submit" name="submit" value="submit">  <br>
+			</form>
+		</div>
+	</th:block>
+
+</body>
+</html>

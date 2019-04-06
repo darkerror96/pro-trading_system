@@ -1,0 +1,77 @@
+
+	
+<!-- @author Karanveer -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Sollers Trading System - Account Home</title>
+</head>
+<style>
+	ul.navList {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		width: 200px;
+		background-color: #f1f1f1;
+		border: 1px solid #555;
+	}
+	
+	li.navItem a {
+		display: block;
+		color: #000;
+		padding: 8px 16px;
+		text-decoration: none;
+	}
+	
+	li.navItem {
+		text-align: center;
+		border-bottom: 1px solid #555;
+	}
+	
+	li.navItem:last-child {
+		border-bottom: none;
+	}
+	
+	li.navItem a.active {
+		background-color: #4CAF50;
+		color: white;
+	}
+	
+	li.navItem a:hover:not(.active) {
+	    background-color: #555;
+	    color: white;
+	}
+	
+	li.navItem a.logout {
+		float:right;
+	}
+</style>
+<body>
+	<h2>Account Home</h2>
+	
+	<!-- If there is an success message, display it -->
+	<p style="color:green;" th:if="${successMessage != null}"><span th:text="${successMessage}"></span><br></p>
+	
+	<!-- If there is an error message, display it -->
+	<p style="color:red;" th:if="${errorMessage != null}"><span th:text="${errorMessage}"></span><br></p>
+	
+	<!-- If there is a user id in session, display it -->
+	<p th:if="${session.userId != null}">Current session user id: <span th:text="${session.userId}"></span></p>
+	
+	<ul class="navList">
+		<li class="navItem"><a class="active" href="AccountHome">Home</a></li>
+		<li class="navItem"><a href="ViewStocks">View Stocks</a></li>
+		<li class="navItem"><a href="add_funds.jsp">Add Funds</a></li>
+		<li class="navItem"><a href="NewOrder">Create Order</a></li>
+		<li class="navItem"><a href="EvaluatePortfolio">Evaluate Portfolio</a></li>
+		<li class="navItem"><a href="#ViewHistory">History</a>
+	</ul>
+
+	<ul class="navList">
+		<li class="navItem"><a class="logout" href="LoginController">Logout</a>
+	</ul>
+
+</body>
+</html>
