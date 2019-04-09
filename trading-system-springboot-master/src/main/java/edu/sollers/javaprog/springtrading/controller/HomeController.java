@@ -2,19 +2,17 @@ package edu.sollers.javaprog.springtrading.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 /**
  * 
  * @author rutpatel
  *
  */
-@RequestMapping("/")
 @Controller
 public class HomeController {
 
-	@GetMapping
+	@GetMapping("/")
 	public String index() {
+		System.out.println("Inside HomeController");
 		return "index";
 	}
 }

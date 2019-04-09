@@ -1,4 +1,4 @@
-package edu.sollers.javaprog.springtrading.config;
+package edu.sollers.javaprog.springtrading;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;

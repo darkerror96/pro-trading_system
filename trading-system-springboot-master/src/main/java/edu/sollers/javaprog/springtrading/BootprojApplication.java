@@ -1,4 +1,4 @@
-package edu.sollers.javaprog.springtrading.config;
+package edu.sollers.javaprog.springtrading;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

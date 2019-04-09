@@ -1,4 +1,4 @@
-package edu.sollers.javaprog.springtrading.config;
+package edu.sollers.javaprog.springtrading;
 
 import java.util.Hashtable;
 import java.util.Vector;
