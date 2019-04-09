@@ -10,7 +10,7 @@
 		var result1 = document.adduserform.password.value.match(regExp);
 		var result2 = document.adduserform.password.value
 				.match(document.adduserform.vpassword.value);
-		if (document.adduserform.password.value.length < 8) {
+		if (document.adduserform.password.value.length < 5) {
 			alert("Password not long enough");
 			document.adduserform.password.value = "";
 			document.adduserform.vpassword.value = "";
@@ -41,9 +41,9 @@
 
 	<form name="adduserform" method="post" action="AddUser"
 		onsubmit="return checker();">
-		Username: <input type="text" name="uname" required><br />
-		Password: <input type="password" name="password" required /><br />
-		Verify Password: <input type="password" name="vpassword" required /><br />
+		Username: <input type="text" name="uname" value="wall" required><br />
+		Password: <input type="password" name="password" value="fury1" required /><br />
+		Verify Password: <input type="password" name="vpassword" value="fury1" required /><br />
 		<button type="submit" name="submit">Create Account</button>
 		<br />
 	</form>

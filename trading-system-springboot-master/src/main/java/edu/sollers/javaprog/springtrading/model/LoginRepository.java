@@ -15,5 +15,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LoginRepository extends CrudRepository<Login, Integer> {
 	@Nullable
-	public Login findByuname(String name);
+	public Login findByUname(String name);
 }

@@ -84,12 +84,7 @@ public class AddAddressController {
 
 		// 2) Process form parameters for address
 		String street1 = request.getParameter("line1");
-		String street2 = (request.getParameter("line2").length() == 0) ? null : request.getParameter("line2"); // if
-																												// empty
-																												// string,
-																												// set
-																												// to
-																												// null
+		String street2 = (request.getParameter("line2").length() == 0) ? null : request.getParameter("line2");
 		String city = request.getParameter("city");
 		String state = request.getParameter("state");
 		String zip = request.getParameter("zip");
@@ -104,7 +99,9 @@ public class AddAddressController {
 			System.out.println("Address already exists in table. Set this account's address_id to: " + address.getId());
 
 		} else {
-			address = new Address(street1, street2, city, state, zip);
+			System.out.println("Unique Address Details...");
+
+			address = new Address(userId, street1, street2, city, state, zip);
 			address = addressRepository.save(address);
 
 			account.setAddress(address);
@@ -127,12 +124,7 @@ public class AddAddressController {
 				street2 = null;
 			} else {
 				street1 = request.getParameter("mLine1");
-				street2 = (request.getParameter("mLine2").length() == 0) ? null : request.getParameter("mLine2"); // if
-																													// empty
-																													// string,
-																													// set
-																													// to
-																													// null
+				street2 = (request.getParameter("mLine2").length() == 0) ? null : request.getParameter("mLine2"); // null
 			}
 			city = request.getParameter("mCity");
 			state = request.getParameter("mState");
@@ -149,7 +141,7 @@ public class AddAddressController {
 						"Mailing address already exists in table. Set mailing_address_id to: " + address.getId());
 			} else {
 				// Create address entity
-				address = new Address(street1, street2, city, state, zip);
+				address = new Address(userId + 1, street1, street2, city, state, zip);
 				address = addressRepository.save(address);
 
 				account.setMailingAddress(address);
@@ -157,9 +149,6 @@ public class AddAddressController {
 			}
 		}
 
-		// Update account
-		// If the account object has an id, it will update
-		// Else it will create
 		accountRepository.save(account);
 
 		return new ModelAndView("add_bank_info");

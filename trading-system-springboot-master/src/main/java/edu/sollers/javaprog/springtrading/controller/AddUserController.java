@@ -38,14 +38,14 @@ public class AddUserController {
 		ModelAndView mv = null;
 
 		// Check for uniqueness
-		boolean uniqueUsername = (loginRepository.findByuname(uname) == null) ? true : false;
+		boolean uniqueUsername = (loginRepository.findByUname(uname) == null) ? true : false;
 
 		if (!uniqueUsername) {
 			String errorMessage = "Username " + uname + " is not available";
 			mv = new ModelAndView("add_user");
 			mv.addObject("errorMessage", errorMessage);
 		} else {
-
+			System.out.println("Unique User Id...");
 			Login login = new Login(uname, password);
 			login = loginRepository.save(login);
 

@@ -39,8 +39,8 @@ public class Address {
 	 * @param state
 	 * @param zip
 	 */
-	public Address(String street1, String street2, String city, String state, String zip) {
-		super();
+	public Address(int id, String street1, String street2, String city, String state, String zip) {
+		this.id = id;
 		this.street1 = street1;
 		this.street2 = street2;
 		this.city = city;

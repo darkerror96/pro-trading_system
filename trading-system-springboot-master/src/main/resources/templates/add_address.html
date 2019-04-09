@@ -12,12 +12,14 @@
 		<fieldset>
 			<legend>Billing Address</legend>
 			<label for="frmLine1">Line 1:</label> <input type="text" name="line1"
-				id="frmLine1" pattern="^\d{1,5}(\s[A-Z][a-z]+)*([\s\.\-[A-Za-z]+)*"
+				id="frmLine1" value="13 Vue St"
+				pattern="^\d{1,5}(\s[A-Z][a-z]+)*([\s\.\-[A-Za-z]+)*"
 				title="Must begin with street number and first word must be capital"
 				required /><br> <label for="frmLine2">Line 2:</label> <input
 				type="text" name="line2" id="frmLine2" /><br> <label
 				for="frmCity">City:</label> <input type="text" name="city"
-				id="frmCity" pattern="^[A-Z][a-z\.]+([\s\-][A-Z][a-z]+)*$"
+				id="frmCity" value="Penta"
+				pattern="^[A-Z][a-z\.]+([\s\-][A-Z][a-z]+)*$"
 				title="Capitalized word(s). No numbers" required /><br> <label
 				for="frmState">State:</label> <select id="frmState" name="state">
 				<option value="AL">Alabama</option>
@@ -50,7 +52,7 @@
 				<option value="NE">Nebraska</option>
 				<option value="NV">Nevada</option>
 				<option value="NH">New Hampshire</option>
-				<option value="NJ">New Jersey</option>
+				<option value="NJ" selected="selected">New Jersey</option>
 				<option value="NM">New Mexico</option>
 				<option value="NY">New York</option>
 				<option value="NC">North Carolina</option>
@@ -72,15 +74,14 @@
 				<option value="WI">Wisconsin</option>
 				<option value="WY">Wyoming</option>
 			</select><br> <label for="frmZip">Zip(+4 optional)</label> <input
-				type="text" name="zip" id="frmZip" pattern="\d{5}"
+				type="text" name="zip" id="frmZip" value="07121"  pattern="\d{5}"
 				title="Must be five digits long" required />-<input type="text"
 				name="zip4" pattern="\d{4}" title="Must be four digits long" /><br>
 
 		</fieldset>
 		<br> <input type="checkbox" name="sameMailing"
 			value="sameMailing" onclick="FillMailing(this.form)"><em>Check
-			this box if mailing address is same as billing</em><br>
-		<br>
+			this box if mailing address is same as billing</em><br> <br>
 
 		<fieldset>
 			<legend>Mailing Address</legend>
@@ -160,45 +161,43 @@
 	</form>
 </body>
 <script>
-		function FillMailing(form) {
-			  if(form.sameMailing.checked == true && form.poBox.checked == false) {
-			    form.mLine1.value = form.line1.value;
-			    form.mLine2.value = form.line2.value;
-			    form.mCity.value = form.city.value;
-			    form.mState.value = form.state.value;
-			    form.mZip.value = form.zip.value;
-			    form.mZip4.value = form.zip4.value;
-			  }
-			  else {
-				  form.mLine1.value = "";
-				  form.mLine2.value = "";
-				  form.mCity.value = "";
-				  form.mState.value = "";
-				  form.mZip.value = "";
-				  form.mZip4.value = "";
-			  }
+	function FillMailing(form) {
+		if (form.sameMailing.checked == true && form.poBox.checked == false) {
+			form.mLine1.value = form.line1.value;
+			form.mLine2.value = form.line2.value;
+			form.mCity.value = form.city.value;
+			form.mState.value = form.state.value;
+			form.mZip.value = form.zip.value;
+			form.mZip4.value = form.zip4.value;
+		} else {
+			form.mLine1.value = "";
+			form.mLine2.value = "";
+			form.mCity.value = "";
+			form.mState.value = "";
+			form.mZip.value = "";
+			form.mZip4.value = "";
 		}
-		function EnablePoBox(form) {
-			if (form.poBox.checked == true) {
-				// require poBox, disable and wipe lines
-				form.mPOBoxNum.disabled = false;
-				form.mPOBoxNum.required = true;
-				form.mLine1.disabled = true;
-				form.mLine1.required = false;
-				form.mLine2.disabled = true;
-				form.mLine2.required = false;
-				form.mLine1.value = "";
-				form.mLine2.value = "";
-			}
-			else {
-				// require lines, disable and wipe poBox
-				form.mPOBoxNum.disabled = true;
-				form.mPOBoxNum.value = "";
-				form.mPOBoxNum.required = false;
-				form.mLine1.disabled = false;
-				form.mLine1.required = true;
-				form.mLine2.disabled = false;
-			}
+	}
+	function EnablePoBox(form) {
+		if (form.poBox.checked == true) {
+			// require poBox, disable and wipe lines
+			form.mPOBoxNum.disabled = false;
+			form.mPOBoxNum.required = true;
+			form.mLine1.disabled = true;
+			form.mLine1.required = false;
+			form.mLine2.disabled = true;
+			form.mLine2.required = false;
+			form.mLine1.value = "";
+			form.mLine2.value = "";
+		} else {
+			// require lines, disable and wipe poBox
+			form.mPOBoxNum.disabled = true;
+			form.mPOBoxNum.value = "";
+			form.mPOBoxNum.required = false;
+			form.mLine1.disabled = false;
+			form.mLine1.required = true;
+			form.mLine2.disabled = false;
 		}
-	</script>
+	}
+</script>
 </html>

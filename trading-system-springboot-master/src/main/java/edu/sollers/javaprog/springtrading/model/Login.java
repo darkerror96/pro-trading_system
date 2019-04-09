@@ -20,6 +20,7 @@ public class Login {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", updatable = false, nullable = false)
 	private Integer id;
+	@Column(name = "username")
 	private String uname;
 	private String password;
 

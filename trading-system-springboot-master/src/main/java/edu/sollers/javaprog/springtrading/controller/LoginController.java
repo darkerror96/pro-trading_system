@@ -53,12 +53,12 @@ public class LoginController {
 		ModelAndView mv = null;
 		boolean loginSuccessful = false;
 
-		if (un.equals("stadmin") && pw.equals("password")) {
+		if (un.equals("ad") && pw.equals("pd")) {
 			session.setAttribute("userId", 50000);
 			mv = new ModelAndView("admin");
 		} else {
 
-			Login n = loginRepository.findByuname(username);
+			Login n = loginRepository.findByUname(username);
 			if (n != null) {
 				System.out.println("n username = " + n.getUname() + "\nn id = " + n.getId());
 				if (n.getPassword().equals(password)) {
