@@ -53,7 +53,7 @@ public class LoginController {
 		ModelAndView mv = null;
 		boolean loginSuccessful = false;
 
-		if (un.equals("ad") && pw.equals("pd")) {
+		if (un.equals("admin") && pw.equals("admin")) {
 			session.setAttribute("userId", 50000);
 			mv = new ModelAndView("admin");
 		} else {
